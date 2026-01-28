@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter Tight", sans-serif;
+}
+
+.profile-card{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 4px;
+    background-color: rgb(191, 137, 137);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.primary-button{
+    background-color: #ce212f;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 0;
+    cursor: pointer;
+}
