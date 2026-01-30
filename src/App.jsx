@@ -1,10 +1,10 @@
-import GroceryListing from "./components/GroceryListing.jsx";
+import Pokemon from "./components/Pokemon.jsx";
 
 function App() {
-
+  
   return (
     <>
-      <GroceryListing />
+      <Pokemon />
     </>
   )
 }
