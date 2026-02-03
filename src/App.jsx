@@ -1,10 +1,10 @@
-import Pokemon from "./components/Pokemon.jsx";
+import TodoApp from "./components/TodoApp";
 
 function App() {
   
   return (
     <>
-      <Pokemon />
+      <TodoApp />
     </>
   )
 }
