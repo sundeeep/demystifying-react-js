@@ -2,7 +2,7 @@
 const PrimaryButton = (props) => {
     // console.log(props);
   return (
-    <button className="primary-button" onClick={props.onClick}>
+    <button type={props?.type === "submit" ? "submit" : "button"} className="bg-linear-to-br from-[#ce212f] to-rose-500 px-3 py-2 text-white" onClick={props.onClick}>
         {props.children}
     </button>
   )
