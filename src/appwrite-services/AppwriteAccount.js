@@ -26,6 +26,13 @@ class AppwriteAccount {
         return currentUser;
     }
 
+    async logOutCurrentUser() {
+        const logoutResponse = await this.appwriteAccount.deleteSession({
+            sessionId: "current"
+        });
+        return logoutResponse;
+    }
+
 }
 
 export default AppwriteAccount;

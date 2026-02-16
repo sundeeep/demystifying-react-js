@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import PrimaryButton from "../components/PrimaryButton";
-import AppwriteAccount from "../appwrite/AppwriteAccount";
+import AppwriteAccount from "../appwrite-services/AppwriteAccount";
 
 const LogInPage = () => {
     const [email, setEmail] = useState("");
@@ -31,7 +31,7 @@ const LogInPage = () => {
     }
   return (
     <div className='h-screen w-screen bg-red-300 flex items-center justify-center'>
-      <form className='bg-white p-15 rounded-2xl border-2 border-amber-300 flex flex-col gap-3' onSubmit={logInUser}>
+      <form className='bg-white p-6 rounded-2xl border-2 border-amber-300 flex flex-col gap-3' onSubmit={logInUser}>
      
         <input onChange={(event) =>setEmail(event.target.value)} value={email} required placeholder="Enter your email..." type="email" />
 
@@ -40,7 +40,11 @@ const LogInPage = () => {
         <PrimaryButton type="submit">
           Login
         </PrimaryButton>
+        <p>
+          Not an user? <Link to="/register" className="text-blue-600 underline">Register</Link>
+        </p>
       </form>
+
     </div>
   )
 }

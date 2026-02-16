@@ -5,10 +5,6 @@ const TodoEditor = () => {
     const [todoText, setTodoText] = useState("");
     const createTodo = useTodoStore((state) => (state.createTodo))
 
-    const handleTodoTextChange = (event) => {
-        setTodoText(event.target.value);
-    }
-
     const handleTodoSubmission = (event) => {
         try {
             event.preventDefault();
@@ -20,10 +16,10 @@ const TodoEditor = () => {
         }
     }
   return (
-    <form onSubmit={handleTodoSubmission}>
-        <input value={todoText} onChange={handleTodoTextChange} type="text"  /> // controlled input
-        <button type="submit">Add todo</button>
-    </form>
+    <form className='flex' onSubmit={handleTodoSubmission}>
+        <input className='border border-red-400 bg-red-50 text-black p-3' value={todoText} onChange={(event) => setTodoText(event.target.value)} type="text"  />
+        <button className='bg-red-600 text-white rounded-md p-3' type="submit">Add todo</button>
+    </form> 
   )
 }
 

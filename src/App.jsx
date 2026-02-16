@@ -1,12 +1,15 @@
 import { useEffect } from "react";
-import TodoApp from "./components/TodoApp";
-import AppwriteAccount from "./appwrite/AppwriteAccount";
+import AppwriteAccount from "./appwrite-services/AppwriteAccount";
 import useUserStore from "./stores/useUserStore";
-import { Link } from "react-router";
+import { Outlet, useNavigate } from "react-router";
+import AppHeader from "./components/AppHeader";
 
 function App() {
-  const appwriteAccount = new AppwriteAccount();
-  const setUser = useUserStore((state) => state.setUser)
+  const appwriteAccount = new AppwriteAccount(); // appwrite-services
+  const setUser = useUserStore((state) => state.setUser) // zustand store
+  console.log("/ page App component rendered!")
+
+  const navigate = useNavigate()
 
   const getCurrentUser = async () => {
     try {
@@ -15,20 +18,22 @@ function App() {
       setUser(currentUser);
     } catch (error) {
       console.error(error)
+      navigate("/login")
     }
   }
 
   useEffect(() => {
     getCurrentUser()
-  }, [])
+  }, []) // componentDidMount()
 
   return (
-    <>
-      <nav>
-        <Link to="/profile">My Profile</Link>
-      </nav>
-      <h1>Home Page</h1>
-    </>
+    <div>
+      
+      <AppHeader />
+      <main>
+        <Outlet />
+      </main>
+    </div>
   )
 }
 

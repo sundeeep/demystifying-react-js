@@ -1,14 +1,9 @@
 import { create } from "zustand";
 
 const useUserStore = create((set) => ({
-    user: {},
-    setUser: (currentUser) => set({user: currentUser})
+    user: null,
+    setUser: (currentUser) => set({user: currentUser}),
+    logOut: () => set({user: {}})
 }))
 
 export default useUserStore;
-
-
-const state = {
-    user: {}
-    
-}
