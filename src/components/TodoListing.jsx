@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 const appwriteTablesDb = new AppwriteTablesDB();
 export const fetchAllTodos = async() => {
     try {
-        const data = await appwriteTablesDb.getAllRecords("693d42e9002449e31781", "todos")
+        const data = await appwriteTablesDb.getAllRecords(import.meta.env.VITE_APPWRITE_DB_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID)
         console.log(data);
         return data;
     } catch (error) {
@@ -17,8 +17,7 @@ const TodoListing = () => {
 
     const {data: todos, isLoading, isPending: isTodosPending, isFetching, error} = useQuery({
         queryKey: ["todos"],
-        queryFn: fetchAllTodos,
-        refetchOnWindowFocus: true
+        queryFn: fetchAllTodos
     })
 
     if(isTodosPending){
@@ -31,7 +30,7 @@ const TodoListing = () => {
                 todos.map((todo) => (
                     <article key={todo?.$id} className='p-3 bg-red-200 rounded-md shadow-sm'>
                         <h1 className="font-semibold text-xl">{todo?.text}</h1>
-                        <p>{todo?.description}</p>
+                        <p>{todo.description ? todo.description : "No Description"}</p>
                     </article>
                 ))
             }
