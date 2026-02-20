@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import AppwriteTablesDB from '../appwrite-services/AppwriteTablesDB';
 import { useQuery } from '@tanstack/react-query';
 
