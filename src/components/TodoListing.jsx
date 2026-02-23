@@ -1,8 +1,10 @@
+import { LoaderPinwheel } from 'lucide-react';
 import AppwriteTablesDB from '../appwrite-services/AppwriteTablesDB';
 import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 const appwriteTablesDb = new AppwriteTablesDB();
-export const fetchAllTodos = async() => {
+export const fetchAllTodos = async () => {
     try {
         console.log("fetching todos")
         const data = await appwriteTablesDb.getAllRecords(import.meta.env.VITE_APPWRITE_DB_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID)
@@ -16,22 +18,33 @@ export const fetchAllTodos = async() => {
 
 const TodoListing = () => {
 
-    const {data: todos, isLoading, isPending, isFetching, error} = useQuery({
-        queryKey: ["todos"],
-        queryFn: fetchAllTodos,
-        throwOnError: (error) =>{
-            console.log(error.message)
-        }
-    })
+    // const { data: todos, isLoading, isPending, isFetching, error } = useQuery({
+    //     queryKey: ["todos"],
+    //     queryFn: fetchAllTodos,
+    //     throwOnError: (error) => {
+    //         console.log(error.message)
+    //     }
+    // })
 
-    // if(isPending){
-    //     console.log("isPending : true")
-    //     return <h1 className='text-5xl'>Todos are Loading for the first time...</h1>
-    // }
+    const [isPending, setIsPending] = useState(true);
 
-    if(isLoading){
+    if (isPending) {
+        console.log("isPending : true")
+        return (
+            <h1 className='text-5xl flex items-center gap-2'>
+                <LoaderPinwheel size={160} className='animate-spin' />
+                
+            </h1>
+        )
+    }
+
+    if (isLoading) {
         console.log("isLoading : true");
-        return <h1 className='text-5xl'>Todos are Loading...</h1>
+        return (
+            <h1 className='text-5xl'>
+                Todos are Loading...
+            </h1>
+        )
     }
 
     return (
