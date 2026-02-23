@@ -6,6 +6,7 @@ export const fetchAllTodos = async() => {
     try {
         console.log("fetching todos")
         const data = await appwriteTablesDb.getAllRecords(import.meta.env.VITE_APPWRITE_DB_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID)
+        throw new Error("Sample Error Found!")
         console.log(data);
         return data;
     } catch (error) {
@@ -17,18 +18,35 @@ const TodoListing = () => {
 
     const {data: todos, isLoading, isPending, isFetching, error} = useQuery({
         queryKey: ["todos"],
-        queryFn: fetchAllTodos
+        queryFn: fetchAllTodos,
+        throwOnError: (error) =>{
+            console.log(error.message)
+        }
     })
 
-    if(isPending){
-        console.log("isPending : true")
+    // if(isPending){
+    //     console.log("isPending : true")
+    //     return <h1 className='text-5xl'>Todos are Loading for the first time...</h1>
+    // }
+
+    if(isLoading){
+        console.log("isLoading : true");
         return <h1 className='text-5xl'>Todos are Loading...</h1>
     }
 
     return (
         <div className='flex flex-col items-center gap-3'>
             {
-                todos.map((todo) => (
+                error && <p className='text-red-600 font-semibold'>{error?.message}</p>
+            }
+            {
+                isLoading && <p>Loading...</p>
+            }
+            {
+                isFetching && <p>Fetching New Todos...</p>
+            }
+            {
+                todos?.map((todo) => (
                     <article key={todo?.$id} className='p-3 bg-red-200 rounded-md shadow-sm'>
                         <h1 className="font-semibold text-xl">{todo?.text}</h1>
                         <p>{todo.description ? todo.description : "No Description"}</p>

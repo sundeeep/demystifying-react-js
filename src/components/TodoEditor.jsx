@@ -9,7 +9,7 @@ const TodoEditor = () => {
     const queryClient = useQueryClient()
 
     const createNewTodo = async () => {
-        const newTodoData = await appwriteTablesDb.createRecord(import.meta.env.VITE_APPWRITE_DB_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID, { text: todoText, description: "" })
+        const newTodoData = await appwriteTablesDb.createRecord(import.meta.env.VITE_APPWRITE_DB_ID, import.meta.env.VITE_APPWRITE_TODOS_TABLE_ID, { todoText: todoText, description: "" })
         console.log(newTodoData);
         return newTodoData;
     }
@@ -58,6 +58,9 @@ const TodoEditor = () => {
         <form className='flex' onSubmit={handleTodoSubmission}>
             <input className='border border-red-400 bg-red-50 text-black p-3' value={todoText} onChange={(event) => setTodoText(event.target.value)} type="text" />
             <button className='bg-red-600 text-white rounded-md p-3' type="submit">Add todo</button>
+            {
+                mutation.isError && <p>{mutation.error.message}</p>
+            }
         </form>
     )
 }
