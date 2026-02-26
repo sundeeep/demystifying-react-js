@@ -1,13 +1,13 @@
 import { useReducer } from 'react'; //react hook
 
 // Step 1: Define the initial state
-const initialState = { count: 5 };
+const initialState = { count: 0 };
 
 // Step 2: Write the reducer function
 // It takes the current state + action, returns new state
 function reducer(state, action) {
     console.log(`current state: ${JSON.stringify(state)}, action: ${action}`);
-    switch (action[0]) {
+    switch (action) {
         case 'increment':
             return { count: state.count + 1 };
         case 'decrement':
