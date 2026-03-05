@@ -3,9 +3,10 @@ import AppwriteAccount from '../appwrite-services/AppwriteAccount'
 import useUserStore from '../stores/useUserStore'
 import { fetchAllTodos } from '../components/TodoListing';
 import { useQuery } from '@tanstack/react-query';
+import { useUser } from '../contexts/UserContext';
 
 const ProfilePage = () => {
-  const currentUser = useUserStore((state) => state.user)
+  const {user: currentUser, logOutUser} = useUser() 
   const appwriteAccount = new AppwriteAccount();
   const navigate = useNavigate();
 
@@ -21,6 +22,7 @@ const ProfilePage = () => {
       const result = await appwriteAccount.logOutCurrentUser();
       console.log(result); 
       if(!result?.message){
+        logOutUser()
         navigate("/login")
       }
     } catch (error) {

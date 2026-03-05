@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import { useReducer } from 'react'
 import PrimaryButton from '../components/PrimaryButton';
 import { Link, useNavigate } from 'react-router';
 import AppwriteAccount from '../appwrite-services/AppwriteAccount';

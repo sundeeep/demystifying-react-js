@@ -18,6 +18,8 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './utils/query-client.js';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import CounterPage from './pages/CounterPage.jsx';
+import { ThemeProvider } from './contexts/ThemeContext.jsx';
+import { UserProvider } from './contexts/UserContext.jsx';
 
 const router = createBrowserRouter([
     {
@@ -78,7 +80,11 @@ const rootDiv = document.getElementById("root");
 createRoot(rootDiv).render(
     <>
         <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
+            <ThemeProvider>
+                <UserProvider>
+                    <RouterProvider router={router} />
+                </UserProvider>
+            </ThemeProvider>
             <ReactQueryDevtools initialIsOpen={false} />
             <ToastContainer />
         </QueryClientProvider>
